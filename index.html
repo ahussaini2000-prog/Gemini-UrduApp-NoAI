@@ -38,10 +38,10 @@
         /* Letter positioning: move Urdu characters to the top */
         .urdu-letter-container {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             justify-content: center;
-            padding-top: 0.75rem;
-            flex: 4;
+            flex: 1;
+            width: 100%;
         }
     </style>
 </head>
@@ -99,8 +99,6 @@
                 if ('speechSynthesis' in window) {
                     let textToSpeak = text;
                     
-                    // Phonetic overrides for specific requests
-                    // 'Sabun': saa (surface) - bon (bond) -> 'sah bon'
                     const audioOverrides = {
                         'و': 'wow',
                         'صابن': 'sah bon',
@@ -115,7 +113,6 @@
                     const utterance = new SpeechSynthesisUtterance(textToSpeak);
                     const voices = window.speechSynthesis.getVoices();
                     
-                    // We use English voice for our phonetic strings to ensure exact pronunciation
                     const isPhoneticOverride = !!audioOverrides[text];
                     const urduVoice = voices.find(v => v.lang.startsWith('ur') || v.name.toLowerCase().includes('urdu'));
                     
@@ -144,7 +141,8 @@
                             <span className="text-2xl md:text-3xl font-light text-slate-400">Urdu Qaida</span>
                         </h1>
                         <p className="text-slate-500 max-w-lg mx-auto">
-                            Interactive Urdu alphabet learning. Select a letter to explore!
+                            Interactive Urdu alphabet learning perfected by Adnan <br />
+                            Select a letter to explore!
                         </p>
                     </header>
 
@@ -159,20 +157,20 @@
                                     >
                                         <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity"></div>
                                         
-                                        {/* Added Emoji at top-right corner */}
-                                        <div className="absolute top-1 right-1 md:top-2 md:right-2 text-sm md:text-base opacity-40 group-hover:opacity-100 transition-opacity">
-                                            {item.emoji}
-                                        </div>
-
                                         <div className="urdu-letter-container">
                                             <span className="font-urdu text-4xl md:text-5xl group-hover:scale-110 transition-transform duration-500">
                                                 {item.char}
                                             </span>
                                         </div>
-                                        <div className="flex-1 w-full flex items-center justify-center bg-black/10 backdrop-blur-sm">
-                                            <span className="text-[10px] md:text-xs uppercase tracking-widest font-bold">
+
+                                        {/* Name at Bottom Left and Emoji at Bottom Right */}
+                                        <div className="w-full px-2 pb-2 mt-auto flex items-end justify-between z-10">
+                                            <span className="text-[10px] md:text-xs uppercase tracking-tight font-black bg-black/20 px-1.5 py-0.5 rounded backdrop-blur-sm">
                                                 {item.name}
                                             </span>
+                                            <div className="w-6 h-6 md:w-8 md:h-8 bg-white rounded-lg shadow-sm flex items-center justify-center text-sm md:text-base">
+                                                {item.emoji}
+                                            </div>
                                         </div>
                                     </button>
                                 ))}
@@ -192,8 +190,7 @@
                                 <div className="w-full bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row min-h-[480px] border border-slate-100">
                                     <div className={`md:w-1/2 ${selectedLetter.color} flex flex-col items-center justify-center p-8 transition-colors duration-500`}>
                                         <div className="text-white text-center">
-                                            {/* Moved letter higher with transform and reduced margin */}
-                                            <h2 className="font-urdu text-9xl mb-3 drop-shadow-xl animate-pop leading-relaxed transform -translate-y-6">
+                                            <h2 className="font-urdu text-9xl mb-3 drop-shadow-xl animate-pop leading-relaxed transform -translate-y-8">
                                                 {selectedLetter.char}
                                             </h2>
                                             <div className="space-y-1">
