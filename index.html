@@ -261,24 +261,24 @@
 
                     <main className="w-full max-w-7xl flex-1 flex flex-col items-center">
                         {viewMode === 'grid' ? (
-                            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3 md:gap-4 animate-fadeIn w-full max-w-5xl">
+                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6 animate-fadeIn w-full max-w-6xl">
                                 {URDU_ALPHABET.map((item) => (
                                     <button
                                         key={item.char}
                                         onClick={() => handleLetterSelect(item)}
-                                        className={`group relative aspect-square ${item.color} rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col items-center text-white overflow-hidden`}
+                                        className={`group relative aspect-square ${item.color} rounded-[2rem] shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col items-center text-white overflow-hidden`}
                                     >
                                         <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity"></div>
                                         <div className="urdu-letter-container">
-                                            <span className="font-urdu text-4xl md:text-5xl group-hover:scale-110 transition-transform duration-500">
+                                            <span className="font-urdu text-6xl md:text-7xl group-hover:scale-110 transition-transform duration-500 drop-shadow-md">
                                                 {item.char}
                                             </span>
                                         </div>
-                                        <div className="w-full px-2 pb-2 mt-auto flex items-end justify-between z-10">
-                                            <span className="text-[10px] md:text-xs uppercase tracking-tight font-black bg-black/20 px-1.5 py-0.5 rounded backdrop-blur-sm">
+                                        <div className="w-full px-4 pb-4 mt-auto flex items-end justify-between z-10">
+                                            <span className="text-[10px] md:text-xs uppercase tracking-wider font-black bg-black/30 px-2 py-1 rounded-lg backdrop-blur-sm border border-white/10">
                                                 {item.name}
                                             </span>
-                                            <div className="w-6 h-6 md:w-8 md:h-8 bg-white rounded-lg shadow-sm flex items-center justify-center text-sm md:text-base">
+                                            <div className="w-10 h-10 md:w-14 md:h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center text-xl md:text-3xl group-hover:rotate-12 transition-transform">
                                                 {item.emoji}
                                             </div>
                                         </div>
