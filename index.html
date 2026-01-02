@@ -35,12 +35,12 @@
         ::-webkit-scrollbar-track { background: #f1f1f1; }
         ::-webkit-scrollbar-thumb { background: #10b981; border-radius: 4px; }
         
-        /* Letter positioning fix: move Urdu characters to the top */
+        /* Letter positioning: move Urdu characters to the top */
         .urdu-letter-container {
             display: flex;
             align-items: flex-start;
             justify-content: center;
-            padding-top: 1rem;
+            padding-top: 0.75rem;
             flex: 4;
         }
     </style>
@@ -49,12 +49,12 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useEffect } = React;
+        const { useState } = React;
 
         const URDU_ALPHABET = [
             { char: 'ا', name: 'Alif', phonetic: 'a', exampleWord: 'Angoor', exampleMeaning: 'Grapes', exampleUrdu: 'انگور', color: 'bg-red-500', emoji: '🍇' },
             { char: 'ب', name: 'Bey', phonetic: 'b', exampleWord: 'Billi', exampleMeaning: 'Cat', exampleUrdu: 'بِلّی', color: 'bg-emerald-500', emoji: '🐱' },
-            { char: 'پ', name: 'Pey', phonetic: 'p', exampleWord: 'Pankha', exampleMeaning: 'Fan', exampleUrdu: 'پنکھا', color: 'bg-blue-500', emoji: '🪭' },
+            { char: 'پ', name: 'Pay', phonetic: 'p', exampleWord: 'Patang', exampleMeaning: 'Kite', exampleUrdu: 'پتنگ', color: 'bg-blue-500', emoji: '🪁' },
             { char: 'ت', name: 'Tey', phonetic: 't', exampleWord: 'Titli', exampleMeaning: 'Butterfly', exampleUrdu: 'تتلی', color: 'bg-pink-500', emoji: '🦋' },
             { char: 'ٹ', name: 'Tey', phonetic: 'T', exampleWord: 'Tamatar', exampleMeaning: 'Tomato', exampleUrdu: 'ٹماٹر', color: 'bg-orange-500', emoji: '🍅' },
             { char: 'ث', name: 'Seh', phonetic: 's', exampleWord: 'Samar', exampleMeaning: 'Fruit', exampleUrdu: 'ثمر', color: 'bg-purple-500', emoji: '🍓' },
@@ -64,15 +64,15 @@
             { char: 'خ', name: 'Khay', phonetic: 'kh', exampleWord: 'Khargosh', exampleMeaning: 'Rabbit', exampleUrdu: 'خرگوش', color: 'bg-rose-500', emoji: '🐰' },
             { char: 'د', name: 'Dal', phonetic: 'd', exampleWord: 'Darakht', exampleMeaning: 'Tree', exampleUrdu: 'درخت', color: 'bg-green-600', emoji: '🌳' },
             { char: 'ڈ', name: 'Dal', phonetic: 'D', exampleWord: 'Dabba', exampleMeaning: 'Box', exampleUrdu: 'ڈبہ', color: 'bg-amber-600', emoji: '📦' },
-            { char: 'ذ', name: 'Zal', phonetic: 'z', exampleWord: 'Zahab', exampleMeaning: 'Gold', exampleUrdu: 'ذہب', color: 'bg-slate-600', emoji: '💰' },
+            { char: 'ذ', name: 'Zal', phonetic: 'z', exampleWord: 'Zakhira', exampleMeaning: 'Storage', exampleUrdu: 'ذخیرہ', color: 'bg-slate-600', emoji: '📦' },
             { char: 'ر', name: 'Rey', phonetic: 'r', exampleWord: 'Rail', exampleMeaning: 'Train', exampleUrdu: 'ریل', color: 'bg-sky-600', emoji: '🚂' },
-            { char: 'ڑ', name: 'Rey', phonetic: 'R', exampleWord: 'Gari', exampleMeaning: 'Car', exampleUrdu: 'گاڑی', color: 'bg-violet-600', emoji: '🚗' },
-            { char: 'ز', name: 'Zay', phonetic: 'z', exampleWord: 'Zebra', exampleMeaning: 'Zebra', exampleUrdu: 'زیبرا', color: 'bg-gray-700', emoji: '🦓' },
-            { char: 'ژ', name: 'Zhay', phonetic: 'zh', exampleWord: 'Zhalabari', exampleMeaning: 'Hail', exampleUrdu: 'ژالہ باری', color: 'bg-cyan-700', emoji: '❄️' },
+            { char: 'ڑ', name: 'Rey (Heavy)', phonetic: 'R', exampleWord: 'Pahar', exampleMeaning: 'Mountain', exampleUrdu: 'پہاڑ', color: 'bg-violet-600', emoji: '⛰️', note: 'Words do not begin with this letter.' },
+            { char: 'ز', name: 'Zay', phonetic: 'z', exampleWord: 'Zanjeer', exampleMeaning: 'Chain', exampleUrdu: 'زنجیر', color: 'bg-gray-700', emoji: '⛓️' },
+            { char: 'ژ', name: 'Zhay', phonetic: 'zh', exampleWord: 'Zhalabari', exampleMeaning: 'Hail', exampleUrdu: 'ژالہ باری', color: 'bg-cyan-700', emoji: '🌨️' },
             { char: 'س', name: 'Seen', phonetic: 's', exampleWord: 'Saib', exampleMeaning: 'Apple', exampleUrdu: 'سیب', color: 'bg-red-600', emoji: '🍎' },
             { char: 'ش', name: 'Sheen', phonetic: 'sh', exampleWord: 'Sher', exampleMeaning: 'Lion', exampleUrdu: 'شیر', color: 'bg-yellow-600', emoji: '🦁' },
-            { char: 'ص', name: 'Suad', phonetic: 's', exampleWord: 'Surahi', exampleMeaning: 'Jug', exampleUrdu: 'صراحی', color: 'bg-orange-600', emoji: '🏺' },
-            { char: 'ض', name: 'Zuad', phonetic: 'z', exampleWord: 'Zaif', exampleMeaning: 'Old Man', exampleUrdu: 'ضعیف', color: 'bg-stone-700', emoji: '👴' },
+            { char: 'ص', name: 'Suad', phonetic: 's', exampleWord: 'Sabun', exampleMeaning: 'Soap', exampleUrdu: 'صابن', color: 'bg-orange-600', emoji: '🧼' },
+            { char: 'ض', name: 'Zuad', phonetic: 'z', exampleWord: 'Zaeef', exampleMeaning: 'Old Man', exampleUrdu: 'ضعیف', color: 'bg-stone-700', emoji: '👴' },
             { char: 'ط', name: 'Toey', phonetic: 't', exampleWord: 'Tota', exampleMeaning: 'Parrot', exampleUrdu: 'طوطا', color: 'bg-emerald-600', emoji: '🦜' },
             { char: 'ظ', name: 'Zoey', phonetic: 'z', exampleWord: 'Zuroof', exampleMeaning: 'Vessels', exampleUrdu: 'ظروف', color: 'bg-lime-600', emoji: '🥣' },
             { char: 'ع', name: 'Ain', phonetic: 'a', exampleWord: 'Ainak', exampleMeaning: 'Glasses', exampleUrdu: 'عینک', color: 'bg-blue-700', emoji: '👓' },
@@ -81,14 +81,14 @@
             { char: 'ق', name: 'Qaf', phonetic: 'q', exampleWord: 'Qalam', exampleMeaning: 'Pen', exampleUrdu: 'قلم', color: 'bg-red-700', emoji: '🖋️' },
             { char: 'ک', name: 'Kaf', phonetic: 'k', exampleWord: 'Kitab', exampleMeaning: 'Book', exampleUrdu: 'کتاب', color: 'bg-blue-800', emoji: '📖' },
             { char: 'گ', name: 'Gaf', phonetic: 'g', exampleWord: 'Gajar', exampleMeaning: 'Carrot', exampleUrdu: 'گاجر', color: 'bg-orange-700', emoji: '🥕' },
-            { char: 'ل', name: 'Lam', phonetic: 'l', exampleWord: 'Lattu', exampleMeaning: 'Spinning Top', exampleUrdu: 'لٹو', color: 'bg-teal-700', emoji: '🪀' },
+            { char: 'ل', name: 'Lam', phonetic: 'l', exampleWord: 'Limo', exampleMeaning: 'Lemon', exampleUrdu: 'لیمو', color: 'bg-teal-700', emoji: '🍋' },
             { char: 'م', name: 'Meem', phonetic: 'm', exampleWord: 'Machli', exampleMeaning: 'Fish', exampleUrdu: 'مچھلی', color: 'bg-cyan-600', emoji: '🐟' },
             { char: 'ن', name: 'Noon', phonetic: 'n', exampleWord: 'Nal', exampleMeaning: 'Tap', exampleUrdu: 'نل', color: 'bg-gray-600', emoji: '🚰' },
-            { char: 'و', name: 'Wao', phonetic: 'v/w', exampleWord: 'Warzish', exampleMeaning: 'Exercise', exampleUrdu: 'ورزش', color: 'bg-sky-500', emoji: '🏋️' },
+            { char: 'و', name: 'Wao', phonetic: 'Wow', exampleWord: 'Warzish', exampleMeaning: 'Exercise', exampleUrdu: 'ورزش', color: 'bg-sky-500', emoji: '🏋️' },
             { char: 'ہ', name: 'Heh', phonetic: 'h', exampleWord: 'Hathi', exampleMeaning: 'Elephant', exampleUrdu: 'ہاتھی', color: 'bg-slate-400', emoji: '🐘' },
-            { char: 'ء', name: 'Hamza', phonetic: "'", exampleWord: 'Chai', exampleMeaning: 'Tea', exampleUrdu: 'چائے', color: 'bg-stone-500', emoji: '☕' },
-            { char: 'ی', name: 'Ye', phonetic: 'y/i', exampleWord: 'Yakka', exampleMeaning: 'Horse', exampleUrdu: 'یکہ', color: 'bg-emerald-400', emoji: '🐎' },
-            { char: 'ے', name: 'Ye', phonetic: 'ay', exampleWord: 'Ladke', exampleMeaning: 'Boys', exampleUrdu: 'لڑکے', color: 'bg-blue-400', emoji: '👦' },
+            { char: 'ء', name: 'Hamza', phonetic: "'", exampleWord: 'Chai', exampleMeaning: 'Tea', exampleUrdu: 'چائے', color: 'bg-stone-500', emoji: '☕', note: 'Does not start words.' },
+            { char: 'ی', name: 'Ye', phonetic: 'y', exampleWord: 'Yaqoot', exampleMeaning: 'Ruby', exampleUrdu: 'یاقوت', color: 'bg-emerald-400', emoji: '💎' },
+            { char: 'ے', name: 'Yay', phonetic: 'ay', exampleWord: 'Ladkay', exampleMeaning: 'Boys', exampleUrdu: 'لڑکے', color: 'bg-blue-400', emoji: '👬', note: 'Used at the end of words.' },
         ];
 
         const App = () => {
@@ -97,11 +97,23 @@
 
             const speak = (text) => {
                 if ('speechSynthesis' in window) {
-                    const utterance = new SpeechSynthesisUtterance(text);
+                    // Special case for Wao to sound like "wow" as requested
+                    let textToSpeak = text;
+                    if (text === 'و') {
+                        textToSpeak = 'wow';
+                    }
+
+                    const utterance = new SpeechSynthesisUtterance(textToSpeak);
                     const voices = window.speechSynthesis.getVoices();
-                    // Attempt to find a native Urdu speaker if available
+                    
+                    // For 'wow', we might want an English voice if text is 'wow'
+                    // For other Urdu letters, we try to find an Urdu voice
                     const urduVoice = voices.find(v => v.lang.startsWith('ur') || v.name.toLowerCase().includes('urdu'));
-                    if (urduVoice) utterance.voice = urduVoice;
+                    
+                    if (textToSpeak !== 'wow' && urduVoice) {
+                        utterance.voice = urduVoice;
+                    }
+                    
                     utterance.rate = 0.8;
                     utterance.pitch = 1.0;
                     window.speechSynthesis.speak(utterance);
@@ -170,8 +182,15 @@
                                             </h2>
                                             <div className="space-y-1">
                                                 <p className="text-3xl font-black uppercase tracking-widest">{selectedLetter.name}</p>
-                                                <p className="text-white/80 font-medium tracking-wide">Phonetic: /{selectedLetter.phonetic}/</p>
+                                                <p className="text-white/80 font-medium tracking-wide">Sound: {selectedLetter.phonetic}</p>
                                             </div>
+                                            {selectedLetter.note && (
+                                                <div className="mt-6 p-3 bg-black/20 rounded-xl backdrop-blur-sm border border-white/20">
+                                                    <p className="text-xs font-semibold leading-relaxed tracking-wide italic">
+                                                        {selectedLetter.note}
+                                                    </p>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
 
