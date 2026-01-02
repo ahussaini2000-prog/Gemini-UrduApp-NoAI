@@ -190,7 +190,12 @@
                                 <div className="w-full bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row min-h-[480px] border border-slate-100">
                                     <div className={`md:w-1/2 ${selectedLetter.color} flex flex-col items-center justify-center p-8 transition-colors duration-500`}>
                                         <div className="text-white text-center">
-                                            <h2 className="font-urdu text-9xl mb-3 drop-shadow-xl animate-pop leading-relaxed transform -translate-y-8">
+                                            {/* Made letter clickable with hover feedback */}
+                                            <h2 
+                                                onClick={() => speak(selectedLetter.char)}
+                                                className="font-urdu text-9xl mb-3 drop-shadow-xl animate-pop leading-relaxed transform -translate-y-8 cursor-pointer hover:scale-110 active:scale-95 transition-transform"
+                                                title="Click to hear sound"
+                                            >
                                                 {selectedLetter.char}
                                             </h2>
                                             <div className="space-y-1">
@@ -220,10 +225,20 @@
                                                 </div>
                                             </div>
 
-                                            <div className="aspect-square w-full rounded-2xl bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100 relative shadow-inner group">
-                                                <span className="text-9xl transition-transform duration-700 group-hover:scale-125 select-none cursor-default">
+                                            {/* Made picture clickable to hear the word */}
+                                            <div 
+                                                onClick={() => speak(selectedLetter.exampleUrdu)}
+                                                className="aspect-square w-full rounded-2xl bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100 relative shadow-inner group cursor-pointer active:scale-95 transition-transform"
+                                                title="Click to hear word"
+                                            >
+                                                <span className="text-9xl transition-transform duration-700 group-hover:scale-125 select-none">
                                                     {selectedLetter.emoji}
                                                 </span>
+                                                <div className="absolute bottom-2 right-2 bg-black/5 p-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
+                                                    <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                                                    </svg>
+                                                </div>
                                             </div>
                                         </div>
 
