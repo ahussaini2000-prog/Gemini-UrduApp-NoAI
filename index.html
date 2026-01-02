@@ -64,9 +64,9 @@
             { char: 'خ', name: 'Khay', phonetic: 'kh', exampleWord: 'Khargosh', exampleMeaning: 'Rabbit', exampleUrdu: 'خرگوش', color: 'bg-rose-500', emoji: '🐰' },
             { char: 'د', name: 'Dal', phonetic: 'd', exampleWord: 'Darakht', exampleMeaning: 'Tree', exampleUrdu: 'درخت', color: 'bg-green-600', emoji: '🌳' },
             { char: 'ڈ', name: 'Dal', phonetic: 'D', exampleWord: 'Dabba', exampleMeaning: 'Box', exampleUrdu: 'ڈبہ', color: 'bg-amber-600', emoji: '📦' },
-            { char: 'ذ', name: 'Zal', phonetic: 'z', exampleWord: 'Zakhira', exampleMeaning: 'Storage', exampleUrdu: 'ذخیرہ', color: 'bg-slate-600', emoji: '📦' },
+            { char: 'ذ', name: 'Zal', phonetic: 'z', exampleWord: 'Zakhira', exampleMeaning: 'Treasure', exampleUrdu: 'ذخیرہ', color: 'bg-slate-600', emoji: '💰' },
             { char: 'ر', name: 'Rey', phonetic: 'r', exampleWord: 'Rail', exampleMeaning: 'Train', exampleUrdu: 'ریل', color: 'bg-sky-600', emoji: '🚂' },
-            { char: 'ڑ', name: 'Rey (Heavy)', phonetic: 'R', exampleWord: 'Pahar', exampleMeaning: 'Mountain', exampleUrdu: 'پہاڑ', color: 'bg-violet-600', emoji: '⛰️', note: 'Words do not begin with this letter.' },
+            { char: 'ڑ', name: 'Rey (Heavy)', phonetic: 'R', exampleWord: 'Pahar', exampleMeaning: 'Mountain', exampleUrdu: 'پہاڑ', color: 'bg-violet-600', emoji: '⛰️', note: 'Words do not begin with this letter. It occurs in the middle or end.' },
             { char: 'ز', name: 'Zay', phonetic: 'z', exampleWord: 'Zanjeer', exampleMeaning: 'Chain', exampleUrdu: 'زنجیر', color: 'bg-gray-700', emoji: '⛓️' },
             { char: 'ژ', name: 'Zhay', phonetic: 'zh', exampleWord: 'Zhalabari', exampleMeaning: 'Hail', exampleUrdu: 'ژالہ باری', color: 'bg-cyan-700', emoji: '🌨️' },
             { char: 'س', name: 'Seen', phonetic: 's', exampleWord: 'Saib', exampleMeaning: 'Apple', exampleUrdu: 'سیب', color: 'bg-red-600', emoji: '🍎' },
@@ -86,7 +86,7 @@
             { char: 'ن', name: 'Noon', phonetic: 'n', exampleWord: 'Nal', exampleMeaning: 'Tap', exampleUrdu: 'نل', color: 'bg-gray-600', emoji: '🚰' },
             { char: 'و', name: 'Wao', phonetic: 'Wow', exampleWord: 'Warzish', exampleMeaning: 'Exercise', exampleUrdu: 'ورزش', color: 'bg-sky-500', emoji: '🏋️' },
             { char: 'ہ', name: 'Heh', phonetic: 'h', exampleWord: 'Hathi', exampleMeaning: 'Elephant', exampleUrdu: 'ہاتھی', color: 'bg-slate-400', emoji: '🐘' },
-            { char: 'ء', name: 'Hamza', phonetic: "'", exampleWord: 'Chai', exampleMeaning: 'Tea', exampleUrdu: 'چائے', color: 'bg-stone-500', emoji: '☕', note: 'Does not start words.' },
+            { char: 'ء', name: 'Hamza', phonetic: "'", exampleWord: 'Chai', exampleMeaning: 'Tea', exampleUrdu: 'چائے', color: 'bg-stone-500', emoji: '☕', note: 'Words do not begin with this letter. It occurs in the middle or end.' },
             { char: 'ی', name: 'Ye', phonetic: 'y', exampleWord: 'Yaqoot', exampleMeaning: 'Ruby', exampleUrdu: 'یاقوت', color: 'bg-emerald-400', emoji: '💎' },
             { char: 'ے', name: 'Yay', phonetic: 'ay', exampleWord: 'Ladkay', exampleMeaning: 'Boys', exampleUrdu: 'لڑکے', color: 'bg-blue-400', emoji: '👬', note: 'Used at the end of words.' },
         ];
@@ -97,20 +97,28 @@
 
             const speak = (text) => {
                 if ('speechSynthesis' in window) {
-                    // Special case for Wao to sound like "wow" as requested
                     let textToSpeak = text;
-                    if (text === 'و') {
-                        textToSpeak = 'wow';
+                    
+                    // Phonetic overrides for specific requests
+                    const audioOverrides = {
+                        'و': 'wow',
+                        'صابن': 'saw bon',
+                        'ڈبہ': 'dub ba',
+                        'تتلی': 'tit lee'
+                    };
+
+                    if (audioOverrides[text]) {
+                        textToSpeak = audioOverrides[text];
                     }
 
                     const utterance = new SpeechSynthesisUtterance(textToSpeak);
                     const voices = window.speechSynthesis.getVoices();
                     
-                    // For 'wow', we might want an English voice if text is 'wow'
-                    // For other Urdu letters, we try to find an Urdu voice
+                    // We use English voice for our phonetic strings to ensure exact pronunciation
+                    const isPhoneticOverride = !!audioOverrides[text];
                     const urduVoice = voices.find(v => v.lang.startsWith('ur') || v.name.toLowerCase().includes('urdu'));
                     
-                    if (textToSpeak !== 'wow' && urduVoice) {
+                    if (!isPhoneticOverride && urduVoice) {
                         utterance.voice = urduVoice;
                     }
                     
