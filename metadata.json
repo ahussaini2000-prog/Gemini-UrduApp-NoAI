@@ -1,0 +1,7 @@
+{
+  "name": "Urdu Qaida - Interactive Learning",
+  "description": "A comprehensive Urdu alphabet learning application featuring interactive flashcards, high-quality text-to-speech pronunciation, and AI-generated visual mnemonics for every letter.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
