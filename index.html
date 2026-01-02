@@ -100,6 +100,7 @@
                     let textToSpeak = text;
                     
                     // Phonetic overrides for specific requests
+                    // Sabun: 'sa (salt) - bon (bonker)' -> 'saw bon'
                     const audioOverrides = {
                         'و': 'wow',
                         'صابن': 'saw bon',
@@ -114,7 +115,7 @@
                     const utterance = new SpeechSynthesisUtterance(textToSpeak);
                     const voices = window.speechSynthesis.getVoices();
                     
-                    // We use English voice for our phonetic strings to ensure exact pronunciation
+                    // Use English engine for phonetic overrides to ensure exact sound mapping
                     const isPhoneticOverride = !!audioOverrides[text];
                     const urduVoice = voices.find(v => v.lang.startsWith('ur') || v.name.toLowerCase().includes('urdu'));
                     
