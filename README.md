@@ -1,6 +1,6 @@
 # Urdu Alphabet Learning App
-**for kids and adults**
-**created with help from AI Studio**
+## for kids and adults
+## created with help from AI Studio
 
 ## Run Locally
 
