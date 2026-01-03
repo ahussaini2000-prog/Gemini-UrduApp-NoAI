@@ -10,9 +10,15 @@
 2. Open index.html in browser (tested on Firefox)
 
 
+<div align="center">
+  <h1><b>Urdu Alphabet Learning App</b></h1>
+  <h3>for kids and adults</h3>
+  <p>created with help from AI Studio</p>
+</div>
+
 
    
-<!-- Old code for preserved below historical purposes --
+<!-- Old code preserved below for historical purposes --
 
 metadata.json
 
@@ -116,6 +122,6 @@ export default defineConfig(({ mode }) => {
 });
 
 
--- Old code for preserved below historical purposes -->
+-- End of Old code section -->
 
 
