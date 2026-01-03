@@ -1,5 +1,5 @@
 <div align="center">
-# "Urdu Alphabet Learning App for kids and adults" src="none"
+*** Urdu Alphabet Learning App for kids and adults
 </div>
 
 # Run and deploy Urdu Alphabet App created with help from AI Studio
