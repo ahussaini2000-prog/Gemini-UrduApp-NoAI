@@ -1,7 +1,11 @@
-# Urdu Alphabet Learning App
 
-
-## Run Locally
+<div align="center">
+  <h1><b>Urdu Alphabet Learning App</b></h1>
+  for kids and adults
+  <br>created with help from AI Studio</br>
+  <h1></h1>
+</div>
+<h2>Run Locally</h2>
 
 **Prerequisites:**  None
 
@@ -10,13 +14,11 @@
 2. Open index.html in browser (tested on Firefox)
 
 
-<div align="center">
-  <h1><b>Urdu Alphabet Learning App</b></h1>
-  <h3>for kids and adults</h3>
-  <p>created with help from AI Studio</p>
-</div>
 
-
+<br>
+<br>
+<br>
+(c) ADNAN. All rights reseved.
    
 <!-- Old code preserved below for historical purposes --
 
