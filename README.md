@@ -1,8 +1,8 @@
 <div align="center">
-<img width="1200" height="475" alt="MyBanner" src="none" />
+# "Urdu Alphabet Learning App for kids and adults" src="none"
 </div>
 
-# Run and deploy your AI Studio app
+# Run and deploy Urdu Alphabet App created with help from AI Studio
 
 This contains everything you need to run your app locally.
 
