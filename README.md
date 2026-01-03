@@ -1,8 +1,4 @@
-<div align="center">
-*** Urdu Alphabet Learning App for kids and adults
-</div>
-
-# Run and deploy Urdu Alphabet App created with help from AI Studio
+# Urdu Alphabet Learning App for kids and adults created with help from AI Studio
 
 This contains everything you need to run your app locally.
 
